@@ -68,3 +68,6 @@ map("n", "<leader>zs", function()
 	local note_name = "school/" .. d[subject] .. "/" .. fname
 	require("telekasten").new_note_with_title({}, note_name)
 end, { desc = "Telekasten: New School Note", nowait = true })
+
+-- other
+map("n", "<leader><leader>", "<cmd>Telescope find_files<cr>", { desc = "telescope find files" })
