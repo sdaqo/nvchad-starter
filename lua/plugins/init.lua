@@ -182,5 +182,17 @@ return {
     keys = {
       { "<leader>nf", "<cmd>lua require('neogen').generate()<cr>", desc="Generate docstring" }
     }
-  }
+  },
+  {
+      'goolord/alpha-nvim',
+      config = function ()
+          require'alpha'.setup(require'alpha.themes.dashboard'.config)
+      end
+  },
+  {
+    'Shatur/neovim-session-manager',
+    dependencies = {
+        "nvim-lua/plenary.nvim",
+    },
+  },
 }
