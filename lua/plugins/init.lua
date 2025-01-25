@@ -74,7 +74,7 @@ return {
   },
 
   {
-    "https://gitea.serve804intern.duckdns.org/sdaqo/telekasten.nvim.git",
+    "https://gitea.home.sdaqo.dev/sdaqo/telekasten.nvim.git",
     opts = {
       home = home,
       take_over_my_home = true,
