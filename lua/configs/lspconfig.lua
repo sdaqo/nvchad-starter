@@ -8,3 +8,5 @@ local servers = {
 
 vim.lsp.config.omnisharp.cmd = { "omnisharp-mono" }
 vim.lsp.enable(servers)
+
+-- read :h vim.lsp.config for changing options of lsp servers 
