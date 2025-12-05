@@ -1,27 +1,11 @@
-local servers = {
-  html = {},
-  cssls = {},
-  ts_ls = {},
-  clangd = {},
-  bashls = {},
-  nil_ls = {},
-  gopls = {},
-  intelephense = {},
-  yamlls = {},
+require("nvchad.configs.lspconfig").defaults()
 
-  pyright = {
-    settings = {
-      python = {
-        analysis = {
-          autoSearchPaths = true,
-          typeCheckingMode = "basic",
-        },
-      },
-    },
-  },
+local servers = {
+  "html", "cssls", "ts_ls", "clangd",
+  "pyright", "intelephense", "yamlls",
+  "nil_ls", "gopls"
 }
 
-for name, opts in pairs(servers) do
-  vim.lsp.config(name, opts)
-  vim.lsp.enable(name)
-end
+vim.lsp.enable(servers)
+
+-- read :h vim.lsp.config for changing options of lsp servers 
