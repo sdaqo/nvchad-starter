@@ -42,7 +42,7 @@ return {
             git = true,
           },
         },
-      },  
+      }
     },
   },
 
@@ -54,14 +54,14 @@ return {
     end,
   },
 
-  {
-    "lervag/vimtex",
-    lazy = false,
-    config = function()
-      vim.g.vimtex_view_method = "zathura"
-      vim.g.vimtex_compiler_progname = "zathura"
-    end,
-  },
+  -- {
+  --   "lervag/vimtex",
+  --   lazy = false,
+  --   config = function()
+  --     vim.g.vimtex_view_method = "zathura"
+  --     vim.g.vimtex_compiler_progname = "zathura"
+  --   end,
+  -- },
 
   {
     "pocco81/auto-save.nvim",
@@ -119,65 +119,46 @@ return {
     end,
   },
 
-  {
-    "simrat39/rust-tools.nvim",
-    lazy = true,
-    event = { "BufReadPost *.rs" },
-    opts = function()
-      local ok, mason_registry = pcall(require, "mason-registry")
-      local adapter ---@type any
-      if ok then
-        -- rust tools configuration for debugging support
-        local codelldb = mason_registry.get_package("codelldb")
-        local extension_path = codelldb:get_install_path() .. "/extension/"
-        local codelldb_path = extension_path .. "adapter/codelldb"
-        local liblldb_path = ""
-        if vim.loop.os_uname().sysname:find("Windows") then
-          liblldb_path = extension_path .. "lldb\\bin\\liblldb.dll"
-        elseif vim.fn.has("mac") == 1 then
-          liblldb_path = extension_path .. "lldb/lib/liblldb.dylib"
-        else
-          liblldb_path = extension_path .. "lldb/lib/liblldb.so"
-        end
-        adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path)
-      end
-      return {
-        dap = {
-          adapter = adapter,
-        },
-        tools = {
-          on_initialized = function()
-            vim.cmd([[
-                  augroup RustLSP
-                    autocmd CursorHold                      *.rs silent! lua vim.lsp.buf.document_highlight()
-                    autocmd CursorMoved,InsertEnter         *.rs silent! lua vim.lsp.buf.clear_references()
-                    autocmd BufEnter,CursorHold,InsertLeave *.rs silent! lua vim.lsp.codelens.refresh()
-                  augroup END
-                ]])
-          end,
-        },
-      }
-    end,
-  },
-  {
-    "kdheepak/lazygit.nvim",
-    cmd = {
-      "LazyGit",
-      "LazyGitConfig",
-      "LazyGitCurrentFile",
-      "LazyGitFilter",
-      "LazyGitFilterCurrentFile",
-    },
-    -- optional for floating window border decoration
-    dependencies = {
-        "nvim-lua/plenary.nvim",
-    },
-    -- setting the keybinding for LazyGit with 'keys' is recommended in
-    -- order to load the plugin when the command is run for the first time
-    keys = {
-       { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
-    }
-  },
+  --{
+  --  "simrat39/rust-tools.nvim",
+  --  lazy = true,
+  --  event = { "BufReadPost *.rs" },
+  --  opts = function()
+  --    local ok, mason_registry = pcall(require, "mason-registry")
+  --    local adapter ---@type any
+  --    if ok then
+  --      -- rust tools configuration for debugging support
+  --      local codelldb = mason_registry.get_package("codelldb")
+  --      local extension_path = codelldb:get_install_path() .. "/extension/"
+  --      local codelldb_path = extension_path .. "adapter/codelldb"
+  --      local liblldb_path = ""
+  --      if vim.loop.os_uname().sysname:find("Windows") then
+  --        liblldb_path = extension_path .. "lldb\\bin\\liblldb.dll"
+  --      elseif vim.fn.has("mac") == 1 then
+  --        liblldb_path = extension_path .. "lldb/lib/liblldb.dylib"
+  --      else
+  --        liblldb_path = extension_path .. "lldb/lib/liblldb.so"
+  --      end
+  --      adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path)
+  --    end
+  --    return {
+  --      dap = {
+  --        adapter = adapter,
+  --      },
+  --      tools = {
+  --        on_initialized = function()
+  --          vim.cmd([[
+  --                augroup RustLSP
+  --                  autocmd CursorHold                      *.rs silent! lua vim.lsp.buf.document_highlight()
+  --                  autocmd CursorMoved,InsertEnter         *.rs silent! lua vim.lsp.buf.clear_references()
+  --                  autocmd BufEnter,CursorHold,InsertLeave *.rs silent! lua vim.lsp.codelens.refresh()
+  --                augroup END
+  --              ]])
+  --        end,
+  --      },
+  --    }
+  --  end,
+  --},
   {
     "danymat/neogen",
     config = true,
@@ -185,20 +166,6 @@ return {
       { "<leader>nf", "<cmd>lua require('neogen').generate()<cr>", desc="Generate docstring" }
     }
   },
-  {
-      'goolord/alpha-nvim',
-      config = function ()
-          require'alpha'.setup(require'alpha.themes.dashboard'.config)
-      end
-  },
-
-  {
-    'Shatur/neovim-session-manager',
-    dependencies = {
-        "nvim-lua/plenary.nvim",
-    },
-  },
-
   {
     "NeogitOrg/neogit",
     lazy = true,
@@ -217,17 +184,4 @@ return {
       { "<leader>gg", "<cmd>Neogit<cr>", desc = "Show Neogit UI" }
     }
   },
-
-  -- test new blink
-  -- { import = "nvchad.blink.lazyspec" },
-
-  -- {
-  -- 	"nvim-treesitter/nvim-treesitter",
-  -- 	opts = {
-  -- 		ensure_installed = {
-  -- 			"vim", "lua", "vimdoc",
-  --      "html", "css"
-  -- 		},
-  -- 	},
-  -- },
 }
